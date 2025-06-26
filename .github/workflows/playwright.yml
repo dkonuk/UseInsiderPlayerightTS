@@ -33,7 +33,5 @@ jobs:
 #    - name: Run Playwright tests with Xvfb
 #      run: xvfb-run --auto-servernum npx playwright test --headed
     - name: Run Playwright tests
-      run: npx playwright test
-      env:
-      PLAYWRIGHT_WORKERS: 1
+      run: npx playwright test --workers=1
 
