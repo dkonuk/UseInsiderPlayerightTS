@@ -1,0 +1,35 @@
+import {type Locator, Page} from "@playwright/test";
+//import {NavigationBar} from "./components/NavigationBar";
+
+export class BasePage{
+    readonly page: Page;
+    readonly cookiesBanner: Locator;
+    readonly cookiesAcceptAllButton: Locator;
+    readonly navigationBarMenu: Locator;
+    constructor(page: Page) {
+        this.page = page;
+        this.navigationBarMenu = page.locator('#navbarNavDropdown');
+        this.cookiesBanner = page.getByRole('heading', { name: 'This website uses cookies' });
+        this.cookiesAcceptAllButton = page.locator('text=Accept all')
+        }
+        async acceptCookiesIfAsked(){
+        if (await this.cookiesBanner.isVisible()) {
+                await this.cookiesAcceptAllButton.click();
+            }
+
+        }
+    async waitForNumberOfSeconds(timeInSeconds: number){
+        await this.page.waitForTimeout(timeInSeconds * 1000);
+    }
+    async navBarClick(parentElementLocator: Locator ,childelementLocator: Locator){
+        await parentElementLocator.click();
+        await childelementLocator.click();
+        await this.page.waitForLoadState('domcontentloaded');
+        if(!await this.navigationBarMenu.isVisible()){
+            await this.page.goBack()
+        }
+    }
+
+
+
+    }
