@@ -72,6 +72,15 @@ export class NavigationBar extends BasePage{
     ]
     //Company
     readonly companyDropDown: Locator;
+    readonly companyNames = [
+        'About Us',
+        'Careers',
+        'Contact Us',
+        'Partnerships',
+        'Technology Partners',
+        'Solution Partners',
+        'Newsroom'
+    ]
 
 
 
@@ -93,7 +102,7 @@ export class NavigationBar extends BasePage{
         this.companyDropDown = page.getByRole('link', { name: 'Company', exact: true });
     }
      getNavigationLink(name:string): Locator{
-         return  this.page.getByText(name);
+         return  this.page.getByRole('link', { name: name });
     }
     async allNavigationLinksUnderWhyInsider(){
         for(const name of this.navigationNamesWhyInsider){
