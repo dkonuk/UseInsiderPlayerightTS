@@ -29,7 +29,8 @@ export default defineConfig({
     actionTimeout: 5000,
     /* Base URL to use in actions like `await page.goto('/')`. */
     baseURL: 'https://useinsider.com',
-    headless: false,
+    headless: true,
+    viewport: { width: 1280, height: 720 },
 
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
