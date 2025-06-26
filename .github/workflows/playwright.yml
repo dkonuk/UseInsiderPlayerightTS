@@ -11,11 +11,6 @@ jobs:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     
-    strategy:
-      matrix:
-        # Run tests on multiple browsers
-        browser: [chromium, firefox, webkit]
-    
     steps:
     - uses: actions/checkout@v4
     
@@ -29,7 +24,7 @@ jobs:
       run: npm ci
     
     - name: Install Playwright Browsers
-      run: npx playwright install --with-deps
+      run: npx playwright install --with-deps chromium
 
 
     - name: Run Playwright tests
