@@ -30,6 +30,10 @@ jobs:
     
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps ${{ matrix.browser }}
-    
+       npx playwright install
+
+    - name: Run Playwright Install
+      run: npx playwright install
+
     - name: Run Playwright tests
       run: npx playwright test
