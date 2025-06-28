@@ -82,8 +82,6 @@ export class NavigationBar extends BasePage{
         'Newsroom'
     ]
 
-
-
     constructor(page: Page) {
         super(page);
         this.page = page;

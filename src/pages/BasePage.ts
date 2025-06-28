@@ -29,6 +29,11 @@ export class BasePage{
             await this.page.goBack()
         }
     }
+    async navigateUsingNavBar(navBarMenuItem:Locator, linkUnderMenuItem:Locator){
+        await navBarMenuItem.hover();
+        await linkUnderMenuItem.click();
+        await this.page.waitForLoadState('domcontentloaded');
+    }
 
 
 
