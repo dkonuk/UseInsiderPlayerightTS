@@ -42,6 +42,10 @@ export class CareersPage extends BasePage{
         'Partner Support Development',
         'Product Design'
     ]
+    //Locations
+    readonly locationsCarousel: Locator;
+    readonly locationsCarouselLocator: Locator;
+    readonly locationsCarouselRightArrow: Locator;
 
 
     constructor(page: Page) {
@@ -67,6 +71,10 @@ export class CareersPage extends BasePage{
         this.mobileBussinessUnit = page.getByText('Mobile Bussiness Unit');
         this.partnerSupportDevelopment = page.getByText('Partner Support & Development');
         this.productDesign = page.getByText('Product Design');
+        //Locations
+        this.locationsCarousel = page.locator('.glide__slide')
+        this.locationsCarouselLocator = page.locator('#location-slider')
+        this.locationsCarouselRightArrow = page.locator('i.icon-arrow-right.location-slider-next.ml-4')
 
 
     }
@@ -81,5 +89,21 @@ export class CareersPage extends BasePage{
                 return false
             }
         }return true
+    }
+    async checkIfAllLocationsAreLoaded(){
+        await this.locationsCarouselLocator.scrollIntoViewIfNeeded()
+        const locationCitiesLocators = await this.locationsCarousel.locator('.location-info p').all();
+        const locationCities:String[] = []
+        for(const locator of locationCitiesLocators){
+            locationCities.push(await locator.innerText())
+        }
+        for(const locationCity of locationCities){
+            await this.locationsCarouselRightArrow.click()
+            const isLocationLoaded = await this.checkIfElementLoaded(this.page.locator('.location-info p').getByText(`${locationCity}`))
+            if(!isLocationLoaded){
+                console.log(`${locationCity} is not loaded`)
+                return false
+            }
+        }
     }
 }

@@ -19,11 +19,15 @@ test("Careers Page", async ({page}) => {
     expect(isLoaded).toBe(true)
 })
 test("Check If Teams Are Loaded", async ({page}) => {
-    const basePage = new BasePage(page);
     const careersPage = new CareersPage(page)
     await careersPage.navigateToCareersPage()
     await careersPage.seeAllTeamsButton.click()
     await careersPage.checkIfAllTeamsAreLoaded()
 
+})
+test("Check if all locations are loaded", async ({page}) => {
+    const careersPage = new CareersPage(page)
+    await careersPage.navigateToCareersPage()
+    await careersPage.checkIfAllLocationsAreLoaded()
 })
 
