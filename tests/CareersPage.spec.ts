@@ -11,12 +11,19 @@ test.beforeEach(async ({page}) => {
     await basePage.acceptCookiesIfAsked()
 })
 
-test("Homepage loaded succesfully", async ({page}) => {
-    const navigationBar = new NavigationBar(page);
-    await expect(page).toHaveTitle('#1 Leader in Individualized, Cross-Channel CX — Insider');
-})
-
 test("Careers Page", async ({page}) => {
+    const basePage = new BasePage(page);
     const careersPage = new CareersPage(page);
     await careersPage.navigateToCareersPage()
+    const isLoaded = await basePage.checkIfElementLoaded(careersPage.findYourDreamJob)
+    expect(isLoaded).toBe(true)
 })
+test("Check If Teams Are Loaded", async ({page}) => {
+    const basePage = new BasePage(page);
+    const careersPage = new CareersPage(page)
+    await careersPage.navigateToCareersPage()
+    await careersPage.seeAllTeamsButton.click()
+    await careersPage.checkIfAllTeamsAreLoaded()
+
+})
+

@@ -34,6 +34,19 @@ export class BasePage{
         await linkUnderMenuItem.click();
         await this.page.waitForLoadState('domcontentloaded');
     }
+    async checkIfElementLoaded(locator: Locator):Promise<boolean>{
+        try {
+            await locator.scrollIntoViewIfNeeded()
+            await this.page.waitForLoadState('domcontentloaded')
+            await locator.waitFor({ state: 'attached', timeout: 5000 }); // 5 second timeout
+            return true; // Element was found
+        } catch (error) {
+            // Element didn't appear within the timeout period
+            console.log("Element not found"+ locator.toString())
+            return false;
+        }
+
+    }
 
 
 

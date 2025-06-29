@@ -102,37 +102,13 @@ export class NavigationBar extends BasePage{
      getNavigationLink(name:string): Locator{
          return  this.page.getByRole('link', { name: name });
     }
-    async allNavigationLinksUnderWhyInsider(){
-        for(const name of this.navigationNamesWhyInsider){
-            const locator = this.getNavigationLink(name)
-            await this.navBarClick(this.whyInsiderDropDown ,locator)
-        }
-    }
     //Locates the first child element if the locator returns multiple Child elements
     getNavigationLinkForMultipleChildren(name:string): Locator{
         return  this.page.getByText(name).first();
     }
 
-    async allNavigationLinksUnderPlatform(){
-        for(const name of this.platformNames){
-            const locator = this.getNavigationLinkForMultipleChildren(name)
-            await this.navBarClick(this.platformDropDown ,locator)
-        }
-    }
-    async allNavigationLinksUnderSolutions(){
-        for(const name of this.solutionsNames){
-            const locator = this.getNavigationLinkForMultipleChildren(name)
-            await this.navBarClick(this.solutionsDropDown ,locator)
-        }
-    }
     async navigationBarCustomers(){
         await this.navBarClick(this.navigationBarMenu ,this.customersDropDown)
-    }
-    async allNavigationBarLinksUnderResources(){
-        for(const name of this.resourcesNames){
-            const locator = this.getNavigationLinkForMultipleChildren(name)
-            await this.navBarClick(this.resourcesDropDown ,locator)
-        }
     }
     async navBarDropDownLinks(dropDownLocator: Locator, names: string[]){
         for(const name of names){
