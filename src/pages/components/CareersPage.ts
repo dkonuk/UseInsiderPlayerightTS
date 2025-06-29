@@ -1,4 +1,4 @@
-import {Page, Locator} from "@playwright/test";
+import {Page, Locator, expect} from "@playwright/test";
 import {BasePage} from "../BasePage";
 import {NavigationBar} from "./NavigationBar";
 
@@ -63,7 +63,7 @@ export class CareersPage extends BasePage{
         this.marketing = page.locator('h3.text-center.mb-4.mb-xl-5').getByText('Marketing');
         this.ceoExecutiveOfficer = page.getByText('CEO’s Executive Office');
         this.purchasingAndOperations = page.getByText('Purchasing & Operations');
-        this.peopleAndCulcutre = page.getByText('People and Culture');
+        this.peopleAndCulcutre = page.getByText('People $ Culture');
         this.businessIntelligence = page.getByText('Business Intelligence');
         this.secuirtyEngineering = page.getByText('Security Engineering');
         this.partnerships = page.getByText('Partnerships');
@@ -105,5 +105,48 @@ export class CareersPage extends BasePage{
                 return false
             }
         }
+    }
+    async checkIfDepartmentPagesLoad(){
+        await this.waitForNumberOfSeconds(1)
+        await this.seeAllTeamsButton.click()
+        await this.waitForNumberOfSeconds(1)
+        for(const team of this.teams){
+            if(await this.seeAllTeamsButton.isVisible()){
+                await this.seeAllTeamsButton.click()
+            }
+            const teamLocator = this.page.locator('h3.text-center.mb-4.mb-xl-5').getByText(`${team}`)
+            await teamLocator.scrollIntoViewIfNeeded()
+            await teamLocator.click()
+            await this.page.waitForLoadState('domcontentloaded')
+            await expect(this.page.getByText(this.normalizeText(team)).first()).toBeVisible()
+            await this.page.goBack()
+
+        }
+    }
+    /**
+     * Normalizes text by handling common variations like "and" vs "&"
+     */
+    private normalizeText(text: string): RegExp {
+        // Replace "and" with a pattern that matches both "and" and "&"
+        const pattern = text
+            .replace(/\s+and\s+/g, '\\s+(?:and|&)\\s+')
+            .replace(/\s+&\s+/g, '\\s+(?:and|&)\\s+');
+
+        // Create a case-insensitive regex that allows for flexible whitespace
+        return new RegExp(`^\\s*${pattern}\\s*$`, 'i');
+    }
+
+    /**
+     * Checks if a team element is visible with text normalization
+     */
+    async checkIfTeamIsVisible(team: string): Promise<void> {
+        // Create a regex pattern that matches both "and" and "&" variations
+        const pattern = this.normalizeText(team);
+
+        // Use the regex pattern instead of exact text matching
+        await expect(this.page
+            .getByText(pattern)
+            .first()
+        ).toBeVisible();
     }
 }

@@ -1,5 +1,5 @@
 import {type Locator, Page} from "@playwright/test";
-//import {NavigationBar} from "./components/NavigationBar";
+
 
 export class BasePage{
     readonly page: Page;

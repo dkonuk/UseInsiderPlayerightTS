@@ -1,8 +1,7 @@
 import {test, expect} from "@playwright/test";
-import {BasePage} from "../src/pages/BasePage";
-import {HomePage} from "../src/pages/HomePage";
-import {CareersPage} from "../src/pages/components/CareersPage";
-import {NavigationBar} from "../src/pages/components/NavigationBar";
+import {BasePage} from "../../src/pages/BasePage";
+import {CareersPage} from "../../src/pages/components/CareersPage";
+
 
 test.beforeEach(async ({page}) => {
     const basePage = new BasePage(page);
@@ -29,5 +28,10 @@ test("Check if all locations are loaded", async ({page}) => {
     const careersPage = new CareersPage(page)
     await careersPage.navigateToCareersPage()
     await careersPage.checkIfAllLocationsAreLoaded()
+})
+test("Check if All Teams Pages Load", async ({page}) => {
+    const careersPage = new CareersPage(page)
+    await careersPage.navigateToCareersPage()
+    await careersPage.checkIfDepartmentPagesLoad()
 })
 
