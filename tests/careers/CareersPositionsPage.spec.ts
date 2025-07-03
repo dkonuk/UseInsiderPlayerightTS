@@ -14,9 +14,19 @@ test("Filter by Location", async ({page}) => {
     await openPositionsPage.scrollToBottomAndTop()
     await openPositionsPage.waitForNumberOfSeconds(1)
     await openPositionsPage.locationFilter.click()
-    await openPositionsPage.waitForNumberOfSeconds(2)
+    await openPositionsPage.waitForNumberOfSeconds(1)
     await openPositionsPage.CheckIfSelectedLocationJobsLoad()
 
+})
+test("Filter by Department", async ({page}) => {
+    const openPositionsPage = new OpenPositionsPage(page)
+    await openPositionsPage.scrollToBottomAndTop()
+    await openPositionsPage.waitForNumberOfSeconds(1)
+    await openPositionsPage.departmentFilter.click()
+    await openPositionsPage.departmentFilter.click()
+    await openPositionsPage.departmentFilter.click()
+    await openPositionsPage.waitForNumberOfSeconds(1)
+    await openPositionsPage.CheckIfSelectedDepartmentJobsLoad()
 })
 
 
