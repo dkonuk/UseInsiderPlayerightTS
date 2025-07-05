@@ -9,6 +9,7 @@ export class OpenPositionsPage extends BasePage {
     readonly istanbulTurkeyLocation: Locator;
     readonly locationOptionsLocator: Locator;
     readonly departmentOptionsLocator: Locator;
+    readonly locationFilterLoadCheck: Locator;
 
     constructor(page: Page) {
         super(page);
@@ -19,6 +20,7 @@ export class OpenPositionsPage extends BasePage {
         this.istanbulTurkeyLocation = page.getByRole('option', {name: 'Istanbul, Turkiye'});
         this.locationOptionsLocator = page.locator('#filter-by-location option:not([value="All"])');
         this.departmentOptionsLocator = page.locator('#filter-by-department option:not([value="All"])');
+        this.locationFilterLoadCheck = this.locationFilter.getByText('Istanbul, Turkiye');
 
     }
     async scrollToBottomAndTop() {
@@ -94,12 +96,12 @@ export class OpenPositionsPage extends BasePage {
                 await firstJobWithDepartment.waitFor({timeout: 7000});
 
                 // Verify the location text
-                const firstJobListingLocation = await this.page.locator('.position-list-item')
+                const firstJobListingDepartment = await this.page.locator('.position-list-item')
                     .first()
                     .locator('.position-department')
                     .textContent();
 
-                console.log(`Verified location: ${departmentText} matches job listing location: ${firstJobListingLocation}`);
+                console.log(`Verified Department: ${departmentText} matches job listing department: ${firstJobListingDepartment}`);
             }
         }
     }

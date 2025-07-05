@@ -12,6 +12,10 @@ test.beforeEach(async ({page}) => {
 test("Filter by Location", async ({page}) => {
     const openPositionsPage = new OpenPositionsPage(page)
     await openPositionsPage.scrollToBottomAndTop()
+    await openPositionsPage.waitForNumberOfSeconds(2)
+    await openPositionsPage.locationFilter.click()
+    await openPositionsPage.waitForNumberOfSeconds(1)
+    await openPositionsPage.locationFilter.click()
     await openPositionsPage.waitForNumberOfSeconds(1)
     await openPositionsPage.locationFilter.click()
     await openPositionsPage.waitForNumberOfSeconds(1)
@@ -21,7 +25,7 @@ test("Filter by Location", async ({page}) => {
 test("Filter by Department", async ({page}) => {
     const openPositionsPage = new OpenPositionsPage(page)
     await openPositionsPage.scrollToBottomAndTop()
-    await openPositionsPage.waitForNumberOfSeconds(1)
+    await openPositionsPage.waitForNumberOfSeconds(2)
     await openPositionsPage.departmentFilter.click()
     await openPositionsPage.departmentFilter.click()
     await openPositionsPage.departmentFilter.click()
