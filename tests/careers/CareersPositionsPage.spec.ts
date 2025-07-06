@@ -1,6 +1,5 @@
 import {test, expect} from "@playwright/test";
 import {BasePage} from "../../src/pages/BasePage";
-import {CareersPage} from "../../src/pages/components/CareersPage";
 import {OpenPositionsPage} from "../../src/pages/components/OpenPositionsPage";
 
 test.beforeEach(async ({page}) => {
