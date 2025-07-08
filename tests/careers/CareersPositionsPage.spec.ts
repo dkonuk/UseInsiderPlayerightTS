@@ -29,7 +29,15 @@ test("Filter by Department", async ({page}) => {
     await openPositionsPage.departmentFilter.click()
     await openPositionsPage.departmentFilter.click()
     await openPositionsPage.waitForNumberOfSeconds(1)
-    await openPositionsPage.CheckIfSelectedDepartmentJobsLoad()
+    await openPositionsPage.CheckIfSelectedDepartmentJobsLoadV2()
 })
-
+test("Filter by both Location and Department", async ({page}) => {
+    const openPositionsPage = new OpenPositionsPage(page);
+    await openPositionsPage.scrollToBottomAndTop();
+    await openPositionsPage.waitForNumberOfSeconds(2);
+    await openPositionsPage.checkIfSelectingBothLocationAndDepartmentLoadsCorrectJobs()
+    //await openPositionsPage.selectLocation(openPositionsPage.istanbulTurkey);
+    //await openPositionsPage.selectDepartment(openPositionsPage.qualityAssurance);
+    await openPositionsPage.waitForNumberOfSeconds(2)
+})
 
