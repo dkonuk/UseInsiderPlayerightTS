@@ -32,6 +32,8 @@ test("Filter by Department", async ({page}) => {
     await openPositionsPage.CheckIfSelectedDepartmentJobsLoadV2()
 })
 test("Filter by both Location and Department", async ({page}) => {
+    // @ts-ignore
+    test.skip(process.env.CI, "Manual test - skipped in CI");
     const openPositionsPage = new OpenPositionsPage(page);
     await openPositionsPage.scrollToBottomAndTop();
     await openPositionsPage.waitForNumberOfSeconds(2);

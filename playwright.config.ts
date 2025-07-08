@@ -12,6 +12,8 @@ import { defineConfig, devices } from '@playwright/test';
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
+  // Skip tests with @manual tag unless RUN_MANUAL_TESTS is set
+  grep: process.env.RUN_MANUAL_TESTS === 'true' ? undefined : /^(?!.*@manual)/,
   testDir: './tests',
   /* Run tests in files in parallel */
   fullyParallel: true,
