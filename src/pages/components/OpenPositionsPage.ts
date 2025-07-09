@@ -151,7 +151,7 @@ export class OpenPositionsPage extends BasePage {
 
                 const firstJobWithDepartment = this.page.locator('.position-list-item')
                     .filter({hasText: departmentText})
-                    .last();
+                    .first();
 
                 // Wait for this element to be visible with the correct location
                 await firstJobWithDepartment.waitFor({timeout: 7000});

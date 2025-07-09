@@ -41,8 +41,6 @@ export default defineConfig({
     ['junit', {
       outputFile: 'test-results/junit.xml'
     }],
-    // List Reporter: Real-time console output during test execution
-    ['list'],
   ],
 
   timeout: 100000,
