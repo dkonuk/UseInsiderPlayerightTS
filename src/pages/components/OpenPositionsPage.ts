@@ -26,7 +26,7 @@ export class OpenPositionsPage extends BasePage {
         this.locationFilterLoadCheck = this.locationFilter.getByText('Istanbul, Turkiye');
         this.qualityAssuranceLocator = page.getByText("Quality Assurance");
         this.istanbulTurkey = 'Istanbul, Turkiye';
-        this.qualityAssurance = 'Sales';
+        this.qualityAssurance = 'Quality Assurance';
     }
     async scrollToBottomAndTop() {
         // Smooth scroll to bottom
@@ -171,9 +171,9 @@ export class OpenPositionsPage extends BasePage {
     }
     async checkIfSelectingBothLocationAndDepartmentLoadsCorrectJobs() {
         await this.selectLocation(this.istanbulTurkey)
-        await this.waitForNumberOfSeconds(1);
+        await this.waitForNumberOfSeconds(2);
         await this.selectDepartment(this.qualityAssurance)
-        await this.selectDepartment(this.qualityAssurance)
+        //await this.selectDepartment(this.qualityAssurance)
         await this.waitForNumberOfSeconds(4);
         const numberOfJobsAvailable = await this.page.locator('.position-list-item').count()
         const jobsList = await this.page.locator('.position-list-item').all()
@@ -182,7 +182,9 @@ export class OpenPositionsPage extends BasePage {
             const job = jobsList[i]
             const jobLocation = await job.locator('.position-location').textContent()
             const jobDepartment = await job.locator('.position-department').textContent()
+            console.log(jobLocation)
             expect(jobLocation).toBe(this.istanbulTurkey)
+            console.log(jobDepartment)
             expect(jobDepartment).toBe(this.qualityAssurance)
             /*if (jobLocation === this.istanbulTurkey && jobDepartment === this.qualityAssurance) {
                 console.log(`Job ${i} is loaded correctly`)

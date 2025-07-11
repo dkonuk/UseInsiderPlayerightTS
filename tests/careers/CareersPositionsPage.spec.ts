@@ -38,8 +38,6 @@ test("Filter by both Location and Department", async ({page}) => {
     await openPositionsPage.scrollToBottomAndTop();
     await openPositionsPage.waitForNumberOfSeconds(2);
     await openPositionsPage.checkIfSelectingBothLocationAndDepartmentLoadsCorrectJobs()
-    //await openPositionsPage.selectLocation(openPositionsPage.istanbulTurkey);
-    //await openPositionsPage.selectDepartment(openPositionsPage.qualityAssurance);
     await openPositionsPage.waitForNumberOfSeconds(2)
 })
 
