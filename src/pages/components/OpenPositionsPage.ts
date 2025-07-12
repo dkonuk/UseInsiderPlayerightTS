@@ -41,10 +41,12 @@ export class OpenPositionsPage extends BasePage {
     }
     async selectLocation(location: string){
         await this.locationFilter.click();
+        await this.page.waitForTimeout(1000);
         await this.page.selectOption('#filter-by-location', location)
     }
     async selectDepartment(department: string){
         await this.departmentFilter.click();
+        await this.page.waitForTimeout(1000);
         await this.page.selectOption('#filter-by-department', department)
     }
     async CheckIfSelectedLocationJobsLoad() {

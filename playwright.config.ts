@@ -49,7 +49,7 @@ export default defineConfig({
     actionTimeout: 5000,
     /* Base URL to use in actions like `await page.goto('/')`. */
     baseURL: 'https://useinsider.com',
-    headless: true,
+    headless: false,
     viewport: { width: 1280, height: 720 },
 
 
