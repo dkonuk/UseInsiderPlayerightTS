@@ -14,6 +14,7 @@ test("Check if Quality Assurance in Istanbul can be applied", async ({page}) => 
     const openPositionsPage = new OpenPositionsPage(page)
     await openPositionsPage.selectLocation(openPositionsPage.istanbulTurkey)
     await openPositionsPage.selectDepartment(openPositionsPage.qualityAssurance)
+    await openPositionsPage.waitForNumberOfSeconds(3)
 
 
 })
