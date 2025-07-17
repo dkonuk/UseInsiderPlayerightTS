@@ -137,14 +137,15 @@ export class OpenPositionsPage extends BasePage {
             await this.page.selectOption('#filter-by-department', departmentText);
 
             // Wait for the page to update after department selection
-            await this.page.waitForTimeout(500); // Give time for the filter to apply
+            await this.page.waitForTimeout(1000); // Give time for the filter to apply
 
             // Check if there are any job postings for the department
             const noJobsVisible = await this.page.getByText('No positions available.').isVisible();
             await this.page.waitForTimeout(500);
             const zeroJobResults = await this.page.locator('#nonResult').isVisible();
+            console.log(noJobsVisible + ' asd ' +  zeroJobResults)
 
-            if (!noJobsVisible || !zeroJobResults) {
+            if (!noJobsVisible && !zeroJobResults) {
                 // Jobs are available for this department
                 console.log(`Found jobs for ${departmentText}`);
                 await this.openPositionsJobListing.scrollIntoViewIfNeeded()
